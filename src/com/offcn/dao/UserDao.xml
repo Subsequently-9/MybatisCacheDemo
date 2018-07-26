@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.offcn.dao.UserDao">
+	<cache></cache>
+	
+	
+	<resultMap type="com.offcn.pojo.Orders" id="rs11">
+      <id column="id" property="id"/>	
+      <result column="number" property="number"/>
+      <result column="createtime" property="createtime"/>
+      <association property="user" select="com.offcn.dao.UserDao.findUserById" column="userId"></association>
+	</resultMap>
+	
+	<select id="getOrdersUser1" resultMap="rs11">
+	    select o.* from orders o
+	</select>
+	<select id="findUserById" resultType="com.offcn.pojo.User">
+	  select * from user where id=#{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.offcn.pojo.User">
+	  insert into user(username) values(#{username})
+	</insert>
+	
+	
+</mapper>
